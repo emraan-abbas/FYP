@@ -1,0 +1,94 @@
+<!-- Register -->
+
+<h1 class="text-center">Register Here !</h1>
+
+<form method="POST" (ngSubmit)="add()">
+  
+  
+  <div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">First Name:</label>
+			<input type="text"  class="form-control" name="firstname" [(ngModel)]="user.first_name">
+		</div>
+  </div>
+  
+	<div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">Last Name:</label>
+			<input type="text"  class="form-control" name="lastname" [(ngModel)]="user.last_name">
+		</div>
+  </div>
+  
+	<div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">Password:</label>
+			<input type="text" class="form-control" name="password" [(ngModel)]="user.pass">
+		</div>	
+  </div>
+
+  <div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">E-mail:</label>
+			<input type="text" class="form-control" name="email" [(ngModel)]="user.email">
+		</div>	
+  </div>
+
+  <div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">Date of Birth:</label>
+      
+        <input type="date" name="dob" [(ngModel)]="user.dob">
+      
+		</div>	
+  </div>
+
+  <div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">Cell Number:</label>
+			<input type="text" class="form-control" name="cell" [(ngModel)]="user.number">
+    </div>
+
+    <div class="row col-md-offset-3">
+      <div class="form-group col-md-6">
+        <label for="">Gender:</label><br>
+        <input type="radio" name="gender" value="male" [(ngModel)]="user.gender"> Male<br>
+        <input type="radio" name="gender" value="female" [(ngModel)]="user.gender"> Female<br>
+        <input type="radio" name="gender" value="other" [(ngModel)]="user.gender"> Other
+      </div>	
+    </div>
+  </div>
+
+  <div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">Country:</label>
+			<input type="text" class="form-control" name="country" [(ngModel)]="user.country">
+		</div>	
+  </div>
+  
+	<button type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Sign Up</button>
+</form>
+
+
+<!-- Log In -->
+
+<h1 class="text-center">Log In !</h1>
+
+<form method="POST" (ngSubmit)="login()">
+  
+  
+	<div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">E-mail:</label>
+			<input type="text"  class="form-control" name="lastname" [(ngModel)]="loginUser.email">
+		</div>
+  </div>
+  
+	<div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">Password:</label>
+			<input type="text" class="form-control" name="password" [(ngModel)]="loginUser.pass">
+		</div>	
+	</div>
+	
+	<button type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Log In</button>
+</form>
