@@ -15,4 +15,12 @@ export class UserService {
   login(user){
     return this.http.post("http://localhost:3000/user/login",user);
   }
+  updateUser(user,id){
+    return this.http.put("http://localhost:3000/user/"+id,user);
+
+  }
+
+  getUser(id){
+    return this.http.get('http://localhost:3000/user/'+id);
+  }
 }

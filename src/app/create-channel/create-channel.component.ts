@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ChannelService } from '../channel.service';
+
+import  {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-create-channel',
@@ -7,9 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateChannelComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private channelService:ChannelService, private router:Router) { }
+  channel= {
+  channel_name:''
+  }
   ngOnInit() {
   }
+  
+  create(){
 
+    console.log(this.channel.channel_name);
+    this.channelService.registerChannel(this.channel).subscribe(res =>{
+      console.log("success");
+      console.log(res);
+   
+         this.router.navigateByUrl("/feed");
+   
+       },err=>{
+         console.log("Error");
+         console.log(err);
+         
+         
+       })
+
+  }
 }

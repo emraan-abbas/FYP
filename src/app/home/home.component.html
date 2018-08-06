@@ -1,5 +1,11 @@
-<!-- Register -->
+<div *ngIf="logedin()">
+<h1 class="text-center">Log Out !</h1>
+<button type="button" class="btn btn-primary row col-md-offset-6" (click)="logout()" style="padding-right:50px" >Log Out!</button>
+</div>
 
+
+<!-- Register -->
+<div *ngIf="!logedin()">
 <h1 class="text-center">Register Here !</h1>
 
 <form method="POST" (ngSubmit)="add()">
@@ -92,3 +98,4 @@
 	
 	<button type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Log In</button>
 </form>
+</div>

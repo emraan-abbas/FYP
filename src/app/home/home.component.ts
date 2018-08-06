@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import  {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
     email:''
   }
 added;
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService, private router:Router) { }
 
   ngOnInit() {
   }
@@ -31,6 +32,23 @@ added;
     this.userService.registerUser(this.user).subscribe(res =>{
       console.log("success");
       console.log(res);
+      this.loginUser.email = this.user.email;
+      this.loginUser.pass = this.user.pass;
+      this.userService.login(this.loginUser).subscribe(res =>{
+        this.added=res;
+         console.log("success");
+         console.log(this.added.token);
+         localStorage.setItem('Token',this.added.token);
+         localStorage.setItem('UserId',this.added._id);
+   
+         this.router.navigateByUrl("/channel/add");
+   
+       },err=>{
+         console.log("Error");
+         console.log(err);
+         
+         
+       })
     },err =>{
       console.log("Error");
       console.log(err);
@@ -44,6 +62,10 @@ added;
       console.log("success");
       console.log(this.added.token);
       localStorage.setItem('Token',this.added.token);
+      localStorage.setItem('UserId',this.added._id);
+
+      this.router.navigateByUrl("/feed");
+
     },err=>{
       console.log("Error");
       console.log(err);
@@ -51,5 +73,18 @@ added;
       
     })
   }
+
+  logout(){
+    localStorage.removeItem('Token');
+    localStorage.removeItem('UserId');
+
+    
+  }
+
+  logedin():boolean{
+    return !!localStorage.getItem('Token');
+  }
+
+
 
 }
