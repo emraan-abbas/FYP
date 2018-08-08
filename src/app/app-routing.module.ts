@@ -10,6 +10,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { PreviousTrendsComponent } from './previous-trends/previous-trends.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VisitingOtherChannelComponent } from './visiting-other-channel/visiting-other-channel.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
   },
   {
     path:'feed',
-    component:FeedComponent
+    component:FeedComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'channel',

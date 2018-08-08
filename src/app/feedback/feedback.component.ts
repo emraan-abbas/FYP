@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import  {Router} from '@angular/router';
+import { FeedbackService } from '../feedback.service';
+
+
 
 @Component({
   selector: 'app-feedback',
@@ -7,9 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackComponent implements OnInit {
 
-  constructor() { }
+  feedbackData;
+  constructor(private feedbackService:FeedbackService,private router:Router) { }
+
+
 
   ngOnInit() {
   }
+
+
+
+  feedback(){
+    console.log(this.feedback);
+    this.feedbackService.createFeedback(this.feedbackData).subscribe(res =>{
+      console.log("success");
+      console.log(res);
+    
+   
+
+
+
+    this.router.navigateByUrl("/feed");
+  })
+}
 
 }
