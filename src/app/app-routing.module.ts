@@ -24,35 +24,43 @@ const routes: Routes = [
   },
   {
     path:'channel',
-    component:ChannelComponent
+    component:ChannelComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'channel/settings',
-    component:ChannelSettingsComponent
+    component:ChannelSettingsComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'channel/add',
-    component:CreateChannelComponent
+    component:CreateChannelComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'video/add',
-    component:CreatingVideoComponent
+    component:CreatingVideoComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'feedback',
-    component:FeedbackComponent
+    component:FeedbackComponent,
+    canActivate:[AuthGuard]
    },
   {
     path:'trends',
-    component:PreviousTrendsComponent
+    component:PreviousTrendsComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'user/profile',
-    component:UserProfileComponent
+    component:UserProfileComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'channel/info',
-    component:VisitingOtherChannelComponent
+    component:VisitingOtherChannelComponent,
+    canActivate:[AuthGuard]
   }
 ];
 

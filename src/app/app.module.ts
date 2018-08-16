@@ -18,6 +18,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { DisplayTrendComponent } from './display-trend/display-trend.component';
 import { VisitingOtherChannelComponent } from './visiting-other-channel/visiting-other-channel.component';
 import { UserService } from "./user.service";
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { UserService } from "./user.service";
     UserProfileComponent,
     FeedbackComponent,
     DisplayTrendComponent,
-    VisitingOtherChannelComponent
+    VisitingOtherChannelComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

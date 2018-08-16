@@ -1,3 +1,23 @@
-<p>
-  creating-video works!
-</p>
+
+
+<div class="row">
+  <button (click)="toggleControls()" class="btn btn-success">Toggle Controls</button>
+  <button (click)="pause()" class="btn btn-warning">Pause</button>
+  <button (click)="resume()" class="btn btn-info">Resume</button>
+  <button (click)="sound()" class="btn btn-danger">Play with Sound</button>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="text-center">
+      <h3>
+        <video #videoElement id="videoElement"></video>
+      </h3>
+    </div>
+  </div>
+</div>
+<div>
+  <button (click)="play()" class="btn btn-danger">Play</button>
+  <video #playVideoElement></video>
+
+</div>

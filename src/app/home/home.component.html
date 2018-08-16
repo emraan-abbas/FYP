@@ -5,73 +5,95 @@
 
 
 <!-- Register -->
+
+
 <div *ngIf="!logedin()">
 <h1 class="text-center">Register Here !</h1>
 
-<form method="POST" (ngSubmit)="add()">
+<form id=reg method="POST" (ngSubmit)="add()">
   
   
-  <div class="row col-md-offset-3">
-		<div class="form-group col-md-6">
-			<label for="">First Name:</label>
-			<input type="text"  class="form-control" name="firstname" [(ngModel)]="user.first_name">
-		</div>
-  </div>
+
+   <div class="input-field col s6">
+          <input type="text"  class="form-control" name="firstname" [(ngModel)]="user.first_name">
+		  <label for="icon_prefix">First Name</label>	  
+	</div>
   
-	<div class="row col-md-offset-3">
-		<div class="form-group col-md-6">
-			<label for="">Last Name:</label>
-			<input type="text"  class="form-control" name="lastname" [(ngModel)]="user.last_name">
-		</div>
-  </div>
-  
-	<div class="row col-md-offset-3">
-		<div class="form-group col-md-6">
-			<label for="">Password:</label>
+	
+    <div class="input-field col s6">
+		<input type="text"  class="form-control" name="lastname" [(ngModel)]="user.last_name">		
+		<label for="last_name">Last Name</label>
+	</div>
+
+
+    <div class="row">
+        <div class="input-field col s12">
 			<input type="text" class="form-control" name="password" [(ngModel)]="user.pass">
+            <label for="password">Password</label>
+		</div>
+	</div>		
+
+
+   <div class="row">
+        <div class="input-field col s12">
+			<input type="text" class="form-control" name="email" [(ngModel)]="user.email">          
+            <label for="email">Email</label>
+        </div>
+	</div>
+
+  
+  <div class="row col-md-offset-3">
+		<div class="form-group col-md-6">
+			<label for="">Date of Birth:</label> 
+        	<input type="date" class="datepicker" name="dob" [(ngModel)]="user.dob">
 		</div>	
   </div>
 
-  <div class="row col-md-offset-3">
-		<div class="form-group col-md-6">
-			<label for="">E-mail:</label>
-			<input type="text" class="form-control" name="email" [(ngModel)]="user.email">
-		</div>	
-  </div>
 
-  <div class="row col-md-offset-3">
-		<div class="form-group col-md-6">
-			<label for="">Date of Birth:</label>
-      
-        <input type="date" name="dob" [(ngModel)]="user.dob">
-      
-		</div>	
-  </div>
 
-  <div class="row col-md-offset-3">
-		<div class="form-group col-md-6">
-			<label for="">Cell Number:</label>
+	<div class="input-field col s6">
 			<input type="text" class="form-control" name="cell" [(ngModel)]="user.number">
-    </div>
+			<label for="icon_telephone">Telephone</label>
+		  </div>
+
 
     <div class="row col-md-offset-3">
       <div class="form-group col-md-6">
-        <label for="">Gender:</label><br>
-        <input type="radio" name="gender" value="male" [(ngModel)]="user.gender"> Male<br>
-        <input type="radio" name="gender" value="female" [(ngModel)]="user.gender"> Female<br>
-        <input type="radio" name="gender" value="other" [(ngModel)]="user.gender"> Other
+		<label for="">Gender:</label><br>
+		<label>
+				<input type="radio" name="gender" value="male" [(ngModel)]="user.gender">
+				
+				<span>Male</span>
+				<br>
+		</label>
+		<label>
+				<input type="radio" name="gender" value="female" [(ngModel)]="user.gender">
+				
+				
+				<span>Female</span>
+				<br>
+		</label>
+		<label>
+				<input type="radio" name="gender" value="other" [(ngModel)]="user.gender">
+				
+				
+				<span>Other</span>
+		</label>
       </div>	
     </div>
-  </div>
 
-  <div class="row col-md-offset-3">
-		<div class="form-group col-md-6">
-			<label for="">Country:</label>
-			<input type="text" class="form-control" name="country" [(ngModel)]="user.country">
-		</div>	
-  </div>
+
+  <div class="row">
+        <div class="input-field col s12">
+				<input type="text" class="form-control" name="country" [(ngModel)]="user.country">			       
+            <label for="email">Country</label>
+        </div>
+	</div>
+
+
+
   
-	<button type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Sign Up</button>
+	<button id="reg-button" type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Sign Up</button>
 </form>
 
 
@@ -79,23 +101,28 @@
 
 <h1 class="text-center">Log In !</h1>
 
-<form method="POST" (ngSubmit)="login()">
+<form id="login" method="POST" (ngSubmit)="login()">
   
+
+
   
-	<div class="row col-md-offset-3">
-		<div class="form-group col-md-6">
-			<label for="">E-mail:</label>
-			<input type="text"  class="form-control" name="lastname" [(ngModel)]="loginUser.email">
-		</div>
-  </div>
+    <div class="input-field col s6">
+		
+		<input type="text"  class="form-control" name="lastname" [(ngModel)]="loginUser.email">		
+		<label for="icon_prefix">Email</label>
+
+	</div>
   
-	<div class="row col-md-offset-3">
-		<div class="form-group col-md-6">
-			<label for="">Password:</label>
+
+	<div class="row">
+			<div class="input-field col s12">
 			<input type="text" class="form-control" name="password" [(ngModel)]="loginUser.pass">
-		</div>	
+			  
+			  <label for="password">Password</label>
+			</div>
 	</div>
 	
-	<button type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Log In</button>
+	<button id="login-button" type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Log In</button>
 </form>
 </div>
+
