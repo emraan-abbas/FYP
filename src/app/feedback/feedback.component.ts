@@ -11,7 +11,10 @@ import { FeedbackService } from '../feedback.service';
 })
 export class FeedbackComponent implements OnInit {
 
-  feedbackData;
+  feedbackData = {
+    feedback_name:'',
+    comments:''
+  };
   constructor(private feedbackService:FeedbackService,private router:Router) { }
 
 
@@ -22,7 +25,7 @@ export class FeedbackComponent implements OnInit {
 
 
   feedback(){
-    console.log(this.feedback);
+    console.log(this.feedbackData);
     this.feedbackService.createFeedback(this.feedbackData).subscribe(res =>{
       console.log("success");
       console.log(res);
