@@ -8,18 +8,12 @@
       </div>
     </div>
     
+  
     <div class="row col-md-offset-3">
       <div class="form-group col-md-6">
         <label for="">Last Name:</label>
         <input type="text"  class="form-control" name="lastname" [(ngModel)]="user.last_name">
       </div>
-    </div>
-
-    <div class="row col-md-offset-3">
-      <div class="form-group col-md-6">
-        <label for="">Password:</label>
-        <input type="text" class="form-control" name="password" [(ngModel)]="user.pass">
-      </div>	
     </div>
 
   
@@ -28,7 +22,7 @@
         <label for="">E-mail:</label>
         <input type="text" class="form-control" name="email" [(ngModel)]="user.email">
       </div>	
-    </div> 
+    </div>
   
     <div class="row col-md-offset-3">
       <div class="form-group col-md-6">
@@ -36,9 +30,33 @@
         <input type="text" class="form-control" name="cell" [(ngModel)]="user.number">
       </div>
     </div>
-  
-  
     
     <button id="button" type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Update</button>
   </form>
+  <p *ngIf="buttonClicked; then firstBtn"></p>
+  <button >Change Password</button>
+  <form id="oldPass" method="POST" (ngSubmit)="comparePass()">
+    <div class="row col-md-offset-3">
+      <div class="form-group col-md-6">
+        <label for="">Enter Old Password:</label>
+        <input type="text"  class="form-control" name="oldPass" [(ngModel)]="changePass.pass">
+      </div>
+    </div>
+    <button id="button" type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Check</button>
+  </form>
   
+<ng-template #firstBtn>
+<p *ngIf="passCheck; then first else second "></p>
+<ng-template #first>
+<form id="changePass" method="POST" (ngSubmit)="edit(1)">
+  <div class="row col-md-offset-3">
+    <div class="form-group col-md-6">
+      <label for="">Password:</label>
+      <input type="text"  class="form-control" name="password" [(ngModel)]="user.pass">
+    </div>
+  </div>
+  <button id="button" type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >Update</button>
+</form>
+</ng-template>
+<ng-template #second> <p>Incorret Password</p></ng-template>
+</ng-template>
