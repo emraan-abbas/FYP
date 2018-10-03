@@ -15,3 +15,4 @@ export class ChannelService {
     return this.http.post("http://localhost:3000/channel/add",channel);
   }
 }
+

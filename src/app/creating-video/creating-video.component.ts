@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
+import RecordRTC from 'recordrtc';
+import { VideoService } from "../video.service";
 
 @Component({
   selector: 'app-creating-video',
@@ -8,49 +10,85 @@ import { ViewChild } from '@angular/core';
 })
 export class CreatingVideoComponent implements OnInit {
 
-  @ViewChild('videoElement') videoElement: any;  
-  @ViewChild('playVideoElement') playvideoElement: any;  
-  video: any;
-  displayControls;
-  constructor() { }
+  private stream: MediaStream;
+  private recordRTC: any
+  @ViewChild('video') video: any
+  constructor(
+    private videoService:VideoService
+  ) { }
 
   ngOnInit() {
-    this.video = this.videoElement.nativeElement;
-  }
-
-  play(){
-    this.playvideoElement.play(this.video);
-  }
-  
-   sound() {
-    this.initCamera({ video: true, audio: true });
-  }
-
-  pause() {
-    this.video.pause();
+    // this.video = this.videoElement.nativeElement;
+    let video:HTMLVideoElement = this.video.nativeElement;
+    video.muted = false;
+    video.controls = true;
+    video.autoplay = false;
   }
 
   toggleControls() {
-    this.video.controls = this.displayControls;
-    this.displayControls = !this.displayControls;
+    let video: HTMLVideoElement = this.video.nativeElement;
+    video.muted = !video.muted;
+    video.controls = !video.controls;
+    video.autoplay = !video.autoplay;
   }
 
-  resume() {
-    this.video.play();
-  }
-  
-    initCamera(config:any) {
-    var browser = <any>navigator;
+  successCallback(stream: MediaStream) {
 
-    browser.getUserMedia = (browser.getUserMedia ||
-      browser.webkitGetUserMedia ||
-      browser.mozGetUserMedia ||
-      browser.msGetUserMedia);
-
-    browser.mediaDevices.getUserMedia(config).then(stream => {
-      this.video.src = window.URL.createObjectURL(stream);
-      this.video.play();
-    });
+    var options = {
+      mimeType: 'video/webm', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
+      bitsPerSecond: 62800000 // if this line is provided, skip above two
+    };
+    this.stream = stream;
+    this.recordRTC = RecordRTC(stream, options);
+    this.recordRTC.startRecording();
+    let video: HTMLVideoElement = this.video.nativeElement;
+    video.src = window.URL.createObjectURL(stream);
+    this.toggleControls();
   }
 
+  errorCallback() {
+    //handle error here
+  }
+
+  processVideo(audioVideoWebMURL) {
+    let video: HTMLVideoElement = this.video.nativeElement;
+    let recordRTC = this.recordRTC;
+    video.src = audioVideoWebMURL;
+    this.toggleControls();
+    var recordedBlob = recordRTC.getBlob();
+    recordRTC.getDataURL(function (dataURL) { });
+  }
+
+  startRecording() {
+    let mediaConstraints = {
+      video: {
+        mandatory: {
+          minWidth: 1280,
+          minHeight: 720
+        }
+      }, audio: true
+    };
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: true })
+      .then(this.successCallback.bind(this), this.errorCallback.bind(this));
+
+
+  }
+  stopRecording() {
+    let recordRTC = this.recordRTC;
+    recordRTC.stopRecording(this.processVideo.bind(this));
+    let stream = this.stream;
+    stream.getAudioTracks().forEach(track => track.stop());
+    stream.getVideoTracks().forEach(track => track.stop());
+  }
+  download() {
+    this.recordRTC.save('video.webm');
+    // this.videoService.addVideo(this.recordRTC).subscribe(res=>{
+    //   console.log("Success!");
+      
+    // },err=>{
+    //   console.log(err)
+    // })
+  }
 }
+

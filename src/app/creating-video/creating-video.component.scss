@@ -1,14 +1,25 @@
-.row{
-    margin: auto;
-    width: 50%;
-    border: 3px solid green;
-    padding: 10px;
-}
+// .row{
+//     margin: auto;
+//     width: 50%;
+//     border: 3px solid green;
+//     padding: 10px;
+// }
 
-#videoElement{
-    margin: auto;
-    width: 50%;
+// #videoElement{
+//     margin: auto;
+//     width: 50%;
     
-    border: 3px solid green;
-    padding: 10px;
-}
+//     border: 3px solid green;
+//     padding: 10px;
+// }
+
+.video {
+    box-shadow: 1px 6px 10px 2px rgba(35, 35, 35, 0.62);
+    height: 600px;
+    max-height: 800px;
+    width: 1067px;
+  }
+  
+  .row {
+    margin-bottom: 20px;
+  }
