@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import RecordRTC from 'recordrtc';
 import { VideoService } from "../video.service";
-
+import { ChannelService } from "../channel.service";
 @Component({
   selector: 'app-creating-video',
   templateUrl: './creating-video.component.html',
@@ -12,9 +12,11 @@ export class CreatingVideoComponent implements OnInit {
 
   private stream: MediaStream;
   private recordRTC: any
+  tags = [];
   @ViewChild('video') video: any
   constructor(
-    private videoService:VideoService
+    private videoService:VideoService,
+    private channelService:ChannelService
   ) { }
 
   ngOnInit() {
@@ -82,13 +84,26 @@ export class CreatingVideoComponent implements OnInit {
     stream.getVideoTracks().forEach(track => track.stop());
   }
   download() {
-    this.recordRTC.save('video.webm');
-    // this.videoService.addVideo(this.recordRTC).subscribe(res=>{
-    //   console.log("Success!");
-      
-    // },err=>{
-    //   console.log(err)
-    // })
+    var blob = this.recordRTC.getBlob()
+    var file = new File([blob], "video.webm", {
+      type: 'video/webm'
+  });
+    var formData = new FormData();
+      formData.append('file', file);
+    this.videoService.addVideo(formData).subscribe(res=>{
+      let fileName = res;
+      console.log("Success!");
+      let vid = {
+        tags : [],
+        date : Date.now(),
+        path : "../videos/"+ fileName,
+        channelId : localStorage.getItem('UserId')
+      }
+      vid.tags = this.tags
+            
+    },err=>{
+      console.log(err)
+    })
   }
 }
 

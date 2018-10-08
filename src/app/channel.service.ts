@@ -9,10 +9,12 @@ export class ChannelService {
 
   constructor(private http:HttpClient) { }
 
-  registerChannel(channel){
-    console.log(channel);
-    
+  registerChannel(channel){ 
     return this.http.post("http://localhost:3000/channel/add",channel);
+  }
+  getUserChannel(userId){
+    return this.http.get("http://localhost:3000/channel/user/"+userId);
+
   }
 }
 
