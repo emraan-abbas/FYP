@@ -102,7 +102,7 @@ export class CreatingVideoComponent implements OnInit {
         let vid = {
           tags : "Cricket_2018",
           date : Date.now(),
-          path : "../videos/"+ fileName,
+          path : "../../assets/"+ fileName,
           channelId : tempRes[0]._id
         }
         console.log(vid);
