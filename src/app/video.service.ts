@@ -21,8 +21,13 @@ export class VideoService {
     return this.http.get("http://localhost:3000/video/user/" + userid);
   }
 
-  addVideo(video){
-    return this.http.post("http://localhost:3000/video/add/" , video);
+  saveVideo(video){
+    return this.http.post("http://localhost:3000/video/save/" , video);
     
   }
+
+  addVideo(vid){
+    return this.http.post("http://localhost:3000/video/add/" , vid);
+  }
+
 }

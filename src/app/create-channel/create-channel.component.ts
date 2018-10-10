@@ -13,9 +13,12 @@ export class CreateChannelComponent implements OnInit {
 
   constructor(private channelService:ChannelService, private router:Router) { }
   channel= {
-  channel_name:''
+  channel_name:'',
+  userId:''
   }
+
   ngOnInit() {
+    this.channel.userId=localStorage.getItem("UserId");
   }
   
   create(){

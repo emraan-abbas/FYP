@@ -84,23 +84,40 @@ export class CreatingVideoComponent implements OnInit {
     stream.getVideoTracks().forEach(track => track.stop());
   }
   download() {
+    let tempRes;
     var blob = this.recordRTC.getBlob()
     var file = new File([blob], "video.webm", {
       type: 'video/webm'
   });
     var formData = new FormData();
-      formData.append('file', file);
-    this.videoService.addVideo(formData).subscribe(res=>{
+    formData.append('file', file);
+    
+    this.videoService.saveVideo(formData).subscribe(res=>{
       let fileName = res;
       console.log("Success!");
-      let vid = {
-        tags : [],
-        date : Date.now(),
-        path : "../videos/"+ fileName,
-        channelId : localStorage.getItem('UserId')
-      }
-      vid.tags = this.tags
-            
+      
+      this.channelService.getChannelByUserId(localStorage.getItem('UserId')).subscribe(res=>{
+        tempRes=res;  
+
+        let vid = {
+          tags : "Cricket_2018",
+          date : Date.now(),
+          path : "../videos/"+ fileName,
+          channelId : tempRes[0]._id
+        }
+        console.log(vid);
+        this.videoService.addVideo(vid).subscribe(res=>{
+          
+          console.log(res);
+          
+
+        },err=>{
+          console.log(err);
+        })     
+      },err=>{
+          console.log(err);
+    })
+
     },err=>{
       console.log(err)
     })

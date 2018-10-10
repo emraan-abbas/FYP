@@ -16,5 +16,8 @@ export class ChannelService {
     return this.http.get("http://localhost:3000/channel/user/"+userId);
 
   }
+  getChannelByUserId(userid){
+    return this.http.get("http://localhost:3000/channel/user/" + userid);
+  }
 }
 
