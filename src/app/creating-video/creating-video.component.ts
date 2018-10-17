@@ -13,6 +13,7 @@ export class CreatingVideoComponent implements OnInit {
   private stream: MediaStream;
   private recordRTC: any
   tags = [];
+  temp;
   @ViewChild('video') video: any
   constructor(
     private videoService:VideoService,
@@ -95,28 +96,28 @@ export class CreatingVideoComponent implements OnInit {
     this.videoService.saveVideo(formData).subscribe(res=>{
       let fileName = res;
       console.log("Success!");
-      
-      this.channelService.getChannelByUserId(localStorage.getItem('UserId')).subscribe(res=>{
-        tempRes=res;  
 
-        let vid = {
-          tags : "Cricket_2018",
-          date : Date.now(),
-          path : "../../assets/"+ fileName,
-          channelId : tempRes[0]._id
-        }
-        console.log(vid);
-        this.videoService.addVideo(vid).subscribe(res=>{
-          
+      let vid = {
+        tags : "Cricket_2018",
+        date : Date.now(),
+        path : "../../assets/"+ fileName
+      }
+      this.videoService.addVideo(vid).subscribe(res=>{
+        console.log(res);
+        this.temp = res;
+        let obj = {
+          userId : localStorage.getItem("UserId"),
+          vid : this.temp._id
+        }  
+        this.channelService.addVideoInChannel(obj).subscribe(res=>{
           console.log(res);
-          
 
         },err=>{
           console.log(err);
-        })     
+        })
       },err=>{
-          console.log(err);
-    })
+        console.log(err);
+      })
 
     },err=>{
       console.log(err)

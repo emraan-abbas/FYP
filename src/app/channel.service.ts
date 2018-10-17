@@ -19,5 +19,8 @@ export class ChannelService {
   getChannelByUserId(userid){
     return this.http.get("http://localhost:3000/channel/user/" + userid);
   }
+  addVideoInChannel(data){
+    return this.http.post("http://localhost:3000/channel/video/add" ,data);
+  }
 }
 
