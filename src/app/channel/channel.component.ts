@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VideoService } from './../video.service';
+import { ChannelService } from './../channel.service';
 import  {Router} from '@angular/router';
 
 
@@ -13,25 +13,20 @@ export class ChannelComponent implements OnInit {
 
   videos;
   id;
-  constructor(private videoService: VideoService,
+  constructor(private channelService: ChannelService,
     private router:Router) {
-    this.id = localStorage.getItem('UserId');
    }
 
   ngOnInit() {
-    this.videoService.getVideoByUserId(this.id).subscribe(res =>{
+    this.id = localStorage.getItem('UserId');
+    this.channelService.getChannelByUserId(this.id).subscribe(res=>{
       this.videos =res;
-      console.log(this.videos);
-    },err => {
-      console.log(err);
-      
+      console.log(this.videos[0]);
     })
-    
   }
 
   settings(){
     this.router.navigateByUrl("channel/settings");
-
   }
 
 }

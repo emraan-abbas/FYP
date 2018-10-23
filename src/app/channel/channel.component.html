@@ -2,20 +2,20 @@
 
     <form method="POST" (ngSubmit)="settings()">
         <button type="submit" class="btn btn-primary row col-md-offset-6" style="padding-right:50px" >User Settings</button>
-      
-       </form>
+    </form>
 
 
-
-
-    <div *ngFor="let video of videos" class="card" style="width:300px;">
-        <p>{{video.userId.first_name}}</p>
+    <div *ngFor="let video of videos[0].videos_list" class="card" style="width:300px;">
+        <!-- <p>{{video.userId.first_name}}</p> -->
         <p>{{ video.tags }}</p>
         <p>{{ video.path }}</p>
       
         <p>{{ video.rating }}</p>
+        <video width="320" height="240" controls>
+          <source src="{{ video.path }}" type="video/webm">
+          Your browser does not support the video tag.
+       </video>
       
       </div>
-
 
 </div>
